@@ -46,6 +46,12 @@ class MenuHelper
                     ['name' => '404 Error', 'path' => '/error-404', 'pro' => false]
                 ],
             ],
+
+            [
+                'icon' => 'Icons',
+                'name' => 'Iconos',
+                'path' => '/icons',
+            ],
         ];
     }
 

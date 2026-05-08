@@ -61,3 +61,14 @@ if (!function_exists('___')) {
             : $translation;
     }
 }
+
+if (!function_exists('reemplazarAttr')) {
+    function reemplazarAttr($texto, $nuevoValor , $attr = 'fill')
+    {
+        return preg_replace(
+            '/'.$attr.'="[^"]*"/i',
+            $attr.'="' . $nuevoValor . '"',
+            $texto
+        );
+    }
+}
