@@ -3,13 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\IconsController;
+use App\Http\Controllers\ModuleController;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 // dashboard pages
-Route::get('/', function () {
-    return view('pages.dashboard.ecommerce', ['title' => 'E-commerce Dashboard']);
-})->name('dashboard');
 
+include('api.php');
 
 Route::get('/update', function () {
         User::create(['name'=>'test','email'=>'test@test.com','password'=> bcrypt(uniqid())]);
@@ -59,11 +60,15 @@ Route::get('/bar-chart', function () {
 
 // authentication pages
 Route::get('/signin', function () {
+    if (auth()->check()) return Redirect()->route('dashboard');
     return view('pages.auth.signin', ['title' => 'Sign In']);
 })->name('signin');
 
 Route::get('/signup', function () {
-    return view('pages.auth.signup', ['title' => 'Sign Up']);
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return Redirect()->route('signin');
 })->name('signup');
 
 // ui elements pages
@@ -98,18 +103,30 @@ Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('google.
 Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
 
 Route::get('/lang/{locale}', function ($locale) {
-
     if (! in_array($locale, ['es', 'en'])) {
         abort(400);
     }
-
     session(['locale' => $locale]);
-
     return redirect()->back();
-
 })->name('lang.switch');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('pages.dashboard.ecommerce', ['title' => 'Dashboard']);
+    })->name('dashboard');
 
+    // Icons
+    Route::get('/icons', [IconsController::class , 'index'])->name('icons');
+    Route::post('/icons/save', [IconsController::class , 'storage'])->name('icons.save');
+    Route::get('/icons/list', [IconsController::class , 'list'])->name('icons.list');
+    //End Icons 
+
+    // Modules
+    Route::get('/modules', [ModuleController::class , 'index'])->name('icons');
+    
+
+    
+});
 
 
 

@@ -9,6 +9,7 @@ use App\Traits\LogsActivity;
 class {{ class }} extends Model
 {
     use LogsActivity;
+    protected $guarded = [];
     
     {{ factory }}
 }
