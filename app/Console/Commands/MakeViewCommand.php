@@ -47,6 +47,21 @@ class MakeViewCommand extends Command
                 </div>
             </div>
         @endsection
+         @push('scripts')
+           <script>
+                function initApp() {
+
+                    return {
+                        loading: false,
+                        eventActive : false,
+                        errorForm : false,
+                        showModal : false,
+                        openModal() { this.showModal = true;},
+                        closeModal() { this.showModal = false;}    
+                    }
+            }
+            </script> 
+        @endpush
 BLADE;
 
         File::put($path, $contenido);

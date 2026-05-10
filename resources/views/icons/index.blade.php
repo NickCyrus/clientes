@@ -115,7 +115,7 @@
         function svgEditor(icons=[]) {
 
             return {
-                 icons: icons,
+                icons: icons,
                 svgcode: '',
                 namesvg : '',
                 wxh : '24px',

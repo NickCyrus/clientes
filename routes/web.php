@@ -116,14 +116,18 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     // Icons
-    Route::get('/icons', [IconsController::class , 'index'])->name('icons');
-    Route::post('/icons/save', [IconsController::class , 'storage'])->name('icons.save');
-    Route::get('/icons/list', [IconsController::class , 'list'])->name('icons.list');
+    Route::group(['prefix'=>'icons'],function(){
+        Route::get('/', [IconsController::class , 'index'])->name('icons');
+        Route::post('/save', [IconsController::class , 'storage'])->name('icons.save');
+        Route::get('/list', [IconsController::class , 'list'])->name('icons.list');
+    });
     //End Icons 
 
     // Modules
-    Route::get('/modules', [ModuleController::class , 'index'])->name('icons');
-    
+    Route::group(['prefix'=>'modules'],function(){
+        Route::get('/', [ModuleController::class , 'index'])->name('modules');
+        Route::post('/save', [ModuleController::class , 'storage'])->name('modules.save');
+    });
 
     
 });

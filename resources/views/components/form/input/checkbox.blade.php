@@ -1,10 +1,11 @@
 
 @props([
-    'model'=>''    
+    'model'=>'',
+    'id'=>'',
 ])
 <div class="relative">
         <label>
-            <input {{$attributes}} type="checkbox" id="toggle1" class="sr-only" x-model="{{$model}}">
+            <input {{$attributes}} type="checkbox" id="{{$id}}" class="sr-only" x-model="{{$model}}" type="checkbox">
                     <div class="block h-6 w-11 rounded-full duration-300"
                         :class="{{$model}}
                             ? 'bg-brand-500'
