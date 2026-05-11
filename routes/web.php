@@ -126,7 +126,11 @@ Route::middleware('auth')->group(function () {
     // Modules
     Route::group(['prefix'=>'modules'],function(){
         Route::get('/', [ModuleController::class , 'index'])->name('modules');
+        Route::match(['get','post'],'/list', [ModuleController::class , 'list'])->name('modules.list');
         Route::post('/save', [ModuleController::class , 'storage'])->name('modules.save');
+        Route::post('/edit', [ModuleController::class , 'edit'])->name('modules.edit');
+        Route::post('/delete', [ModuleController::class , 'delete'])->name('modules.delete');
+        
     });
 
     

@@ -84,3 +84,9 @@ function jSuccess($data=[]){
 function jError($data=[]){
     return response()->json(array_merge(['success'=>false , 'error'=>true , 'errormsg'=>'Se ha producido un error'] , $data ), 400);
 }
+ 
+function numberByPage(){
+    return 50;
+}
+
+ 

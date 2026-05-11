@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('{{ table }}', function (Blueprint $table) {
-            $table->id();
-            $table->integer('erased')->default(0)->nullable();
+        Schema::table('modules', function (Blueprint $table) {
+            //
+            $table->integer('erased')->nullable();
             $table->integer('erased_user_id')->nullable();
-            $table->timestamps();
         });
     }
 
@@ -24,6 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('{{ table }}');
+        Schema::table('modules', function (Blueprint $table) {
+            //
+            $table->dropColumn('erased');
+            $table->dropColumn('erased_user_id');
+        });
     }
 };

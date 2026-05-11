@@ -8,7 +8,9 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 // FullCalendar
 import { Calendar } from '@fullcalendar/core';
+import Tooltip from "@ryangjchandler/alpine-tooltip";
 
+Alpine.plugin(Tooltip);
 
 
 window.Alpine = Alpine;

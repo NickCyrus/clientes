@@ -11,6 +11,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css" />
+    
     <!-- Alpine.js -->
     {{-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
     
@@ -77,18 +79,25 @@
 
     <!-- Apply dark mode immediately to prevent flash -->
     <script>
-        (function() {
+        (function () {
             const savedTheme = localStorage.getItem('theme');
-            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            const theme = savedTheme || systemTheme;
+            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+            const theme = savedTheme || systemTheme; 
             if (theme === 'dark') {
                 document.documentElement.classList.add('dark');
-                document.body.classList.add('dark', 'bg-gray-900');
+                if (document.body) {
+                    document.body.classList.add('dark', 'bg-gray-900');
+                }
             } else {
                 document.documentElement.classList.remove('dark');
+
+            if (document.body) {
                 document.body.classList.remove('dark', 'bg-gray-900');
             }
-        })();
+        }
+    })();
     </script>
     
 </head>
